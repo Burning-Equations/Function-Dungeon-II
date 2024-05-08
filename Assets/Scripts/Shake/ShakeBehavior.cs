@@ -9,10 +9,13 @@ namespace Shake
     [ExecuteInEditMode]
     public class ShakeBehavior : MonoBehaviour
     {
+        // Inconsistent access modifier
+        // Inconsistent object creation
+        // Serialized fields should start with a lowercase letter
         [SerializeField] UnityEvent OnShakeStart = new UnityEvent();
 
         [SerializeField] UnityEvent OnShakeEnd = new UnityEvent();
-
+        // Remove, user experience nightmare
         [SerializeField] private float shakeDuration = 0.5f;
 
         /// <summary>
@@ -22,8 +25,9 @@ namespace Shake
         {
             get { return shakeDuration; }
             set { shakeDuration = value; }
-        }
-
+        } 
+        // Inline class fields, properties need to be after the fields, before methods
+        // Inconsistent object creation, should not declare type
         [SerializeField]
         private Vector2 shakeIntensity = new Vector2(0.5f, 0.5f);
 
@@ -47,7 +51,7 @@ namespace Shake
             get { return enableDecay; }
             set { enableDecay = value; }
         }
-
+        // Inconsistent naming, missing underscore
         private Vector3 originalPosition;
         private float currentShakeDuration;
         private Vector2 initialShakeIntensity;
@@ -57,6 +61,7 @@ namespace Shake
         /// </summary>
         private void Awake()
         {
+            // Move to start, use awake for object creation or retrieving references
             originalPosition = transform.localPosition;
         }
 
@@ -65,12 +70,16 @@ namespace Shake
         /// </summary>
         private void Update()
         {
+            // Make it coroutine based to fire in the different shake methods
             if (currentShakeDuration > 0)
             {
+                // Make it a class field over initialising new object every frame
                 Vector3 shakeAmount;
 
                 if (enableDecay)
                 {
+                    // Type can be inferred, implicit over explicit typing
+                    // Move to method to avoid duplicity
                     float decayRate = currentShakeDuration / shakeDuration;
                     shakeAmount = new Vector3(
                         initialShakeIntensity.x * Random.insideUnitSphere.x * decayRate,
@@ -79,6 +88,7 @@ namespace Shake
                 }
                 else
                 {
+                    // Move to method to avoid duplicity
                     shakeAmount = new Vector3(
                         initialShakeIntensity.x * Random.insideUnitSphere.x,
                         initialShakeIntensity.y * Random.insideUnitSphere.y,
@@ -86,6 +96,7 @@ namespace Shake
                 }
 
                 transform.localPosition = originalPosition + shakeAmount;
+                // Currently shake duration is defined by amount of frames instead of time value, make thid clear
                 currentShakeDuration -= Time.deltaTime;
                 OnShakeStart.Invoke();
             }
@@ -107,6 +118,7 @@ namespace Shake
             currentShakeDuration = duration;
             initialShakeIntensity = intensity;
             shakeIntensity = intensity; // This can be removed if not used elsewhere
+            // Fire coroutine here
         }
 
         /// <summary>

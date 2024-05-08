@@ -1,11 +1,14 @@
 using UnityEditor;
 using UnityEngine;
+// Missing space
+// Wrong namespacing
 namespace LineController
 {
-
+    // Extra space
     [CustomEditor(typeof(TrajectoryLineController))]
     public class TrajectoryLineControllerEditor : Editor
     {
+        // Wrong naming for private class fields
         private SerializedProperty debugProp;
         private SerializedProperty projectileVelocityProp;
         private SerializedProperty trajectoryLineRendererProp;
@@ -15,6 +18,7 @@ namespace LineController
         private SerializedProperty groundLevelProp;
         private SerializedProperty timeStepProp;
 
+        // Inconsistent access modifiers
         void OnEnable()
         {
             // Cache the serialized properties
@@ -32,6 +36,7 @@ namespace LineController
         {
             serializedObject.Update();  // Load the actual values
 
+            // Create functions for specific sections to have less inline comments
             // Script field
             var script = MonoScript.FromMonoBehaviour((TrajectoryLineController)target);
             EditorGUI.BeginDisabledGroup(true);

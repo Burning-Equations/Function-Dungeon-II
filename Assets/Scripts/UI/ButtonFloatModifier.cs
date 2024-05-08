@@ -4,12 +4,14 @@ using UnityEngine;
 
 namespace UI
 {
+    // Docstring for the class
     public class ButtonFloatModifier : MonoBehaviour
     {
         [Header("Settings")] 
         [SerializeField] private float startValue;
         [SerializeField] private Vector2 range = new(-10f, 10f);
         [SerializeField] private float step = 0.1f;
+        // Unclear naming, what is roundings? (decimal points)
         [SerializeField] private int roundings = 1;
 
         [Header("Events")] 

@@ -1,10 +1,12 @@
 using UnityEngine;
 using UnityEditor;
+// Missing space
 namespace LineController
 {
     [CustomEditor(typeof(FunctionLineController))]
     public class FunctionLineControllerEditor : Editor
     {
+        // Private fields must start with an `_`
         private SerializedProperty isQuadratic;
         private SerializedProperty a;
         private SerializedProperty b;
@@ -29,15 +31,18 @@ namespace LineController
         {
             serializedObject.Update();
 
+            // Put it in a separate method
             // Script field (non-editable)
             var script = MonoScript.FromMonoBehaviour((FunctionLineController)target);
             EditorGUI.BeginDisabledGroup(true);
             EditorGUILayout.ObjectField("Script", script, typeof(MonoScript), false);
             EditorGUI.EndDisabledGroup();
 
+            
             // Toggle use of the exponent 'c'
             EditorGUILayout.PropertyField(isQuadratic, new GUIContent("Use Exponent (c in x^c)"));
 
+            // Put it in a separate method
             // Input fields for coefficients with labels
             EditorGUILayout.LabelField("Configure Linear Equation:");
             EditorGUILayout.PropertyField(a, new GUIContent("Coefficient a (Scale factor for x^c)"));
@@ -50,16 +55,18 @@ namespace LineController
             }
 
             // Display the current equation with dynamic values
+            // String interpolation is preferred over concatenation
             var equation = "y = " + a.floatValue.ToString("F2") + "x";
+            // User experience nightmare
             if (isQuadratic.boolValue && c.floatValue != 1)
             {
                 equation += "^" + c.floatValue.ToString("F1");
             }
             equation += " + " + b.floatValue.ToString("F2");
-
+            // String interpolation is preferred over concatenation
             EditorGUILayout.LabelField("Current Equation: " + equation);
-
-            // Additional settings
+            
+            // Additional settings -> put in functions to remove comments
             EditorGUILayout.PropertyField(lineLength);
             EditorGUILayout.PropertyField(segments);
             EditorGUILayout.PropertyField(lineRenderer);

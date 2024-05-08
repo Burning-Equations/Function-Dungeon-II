@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+// Unnecessary script, Unity has built-in everything you need
 public class PhysicsScript : MonoBehaviour
 {
     private Rigidbody2D _rb;
@@ -14,6 +15,7 @@ public class PhysicsScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        // Use GetComponent in OnAwake
         _rb = GetComponent<Rigidbody2D>();
         _physicsMaterial = new PhysicsMaterial2D();
         _physicsMaterial.bounciness = bounciness;

@@ -3,6 +3,7 @@ using UnityEngine;
 
 namespace UI.LinearEquation
 {
+    // Add class docstring
     [RequireComponent(typeof(TMP_Text))]
     public class LinearEquationTextModifier : MonoBehaviour
     {

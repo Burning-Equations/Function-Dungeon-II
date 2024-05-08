@@ -1,7 +1,7 @@
 using UnityEngine;
 using System;
 using UnityEngine.Events;
-
+// Unnecessary, see LineSettings.cs
 namespace LineController
 {
     [ExecuteInEditMode]

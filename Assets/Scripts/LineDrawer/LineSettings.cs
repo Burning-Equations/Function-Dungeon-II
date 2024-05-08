@@ -1,5 +1,6 @@
 using UnityEngine;
-
+// Incorrect namespace
+// Unnecessary class when you can already change the variables from the line renderer
 namespace LineController
 {
     [ExecuteInEditMode]
@@ -23,6 +24,7 @@ namespace LineController
 
         private void SubscribeChanges()
         {
+            // Inconsistency with the if braces
             if (functionLineSettings != null)
                 functionLineSettings.OnSettingsChanged += ApplyFunctionLineSettings;
             if (trajectoryLineSettings != null)

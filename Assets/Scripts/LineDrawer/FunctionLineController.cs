@@ -1,18 +1,22 @@
+// Unused using directives
 using System;
 using UnityEngine;
-
+// Correct the namespace
 namespace LineController
 {
+    // Use require component, change application to actual view object, instead of the controller
     [ExecuteInEditMode]
     public class FunctionLineController : MonoBehaviour
     {
         [Header("Function settings")]
+        // Bools are already false by default
         public bool isQuadratic = false;
 
         [Header("Function coefficients")]
         [Tooltip("This variable defines the slope of the function.")]
         [SerializeField] private float a = 1f;
         [Tooltip("This variable defines the y-intercept of the function.")]
+        // Floats are already 0 by default
         [SerializeField] private float b = 0f;
         [Tooltip("This variable defines the quadratic power of the function.")]
         [Min(0.001f)]
@@ -20,6 +24,8 @@ namespace LineController
 
         [Header("Visual settings")]
         [SerializeField] private float lineLength = 10f;
+        // Missing space
+        // Properties must be after class fields and before methods
         public float LineLength
         {
             get { return lineLength; }
@@ -32,9 +38,9 @@ namespace LineController
 
         [SerializeField] private int segments = 10;
         [SerializeField] private LineRenderer lineRenderer;
-
-
-
+        // Double spaces
+        
+        
         private void Start()
         {
             DrawFunction();
@@ -71,24 +77,29 @@ namespace LineController
         /// <summary>
         /// Draws the function line based on the current coefficients and settings.
         /// </summary>
+        // Unclear naming, is not drawing the line...
         private void DrawFunction()
         {
             if (!isQuadratic)
             {
                 c = 1; // Forcing 'c' to be 1 if not quadratic
             }
+            // Remove this when using the require component
             if (lineRenderer == null)
             {
                 Debug.LogError("LineRenderer is missing.");
                 return;
             }
+            // Why are we doing this?
             lineRenderer.positionCount = segments + 1;
+            // Remove this, not needed, debugging stuff
             lineRenderer.startWidth = 0.1f;
             lineRenderer.endWidth = 0.1f;
 
             var step = lineLength / segments;
             for (var i = 0; i <= segments; i++)
             {
+                // Add comments to explain logarithm
                 var x = i * step;
                 var y = EvaluateFunction(x);
                 lineRenderer.SetPosition(i, new Vector3(x, y, 0));

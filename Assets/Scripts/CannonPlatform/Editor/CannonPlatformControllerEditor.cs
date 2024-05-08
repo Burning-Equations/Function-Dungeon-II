@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEditor;
 
+// Fix namespace
 namespace CannonPlatform
 {
     [CustomEditor(typeof(CannonPlatformController))]
@@ -9,7 +10,7 @@ namespace CannonPlatform
         public override void OnInspectorGUI()
         {
             DrawDefaultInspector(); // Draws the default inspector
-
+            // Explicit type declaration over implicit, please use var
             CannonPlatformController script = (CannonPlatformController)target;
 
             if (GUILayout.Button("Move Up (1f)"))

@@ -1,15 +1,19 @@
+// Unused namespaces should be removed
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
 
+// Missing namespace
 public class CanvasManager : MonoBehaviour
 {
+    // Wrong access modifier, should be private serialized field
+    // Missing object creation
     public UnityEvent onAllEnemiesKilledEvent;
     public static CanvasManager instance;
 
-    [SerializeField]
+    [SerializeField] 
     private TextMeshProUGUI enemyText;
     private void Awake()
     {

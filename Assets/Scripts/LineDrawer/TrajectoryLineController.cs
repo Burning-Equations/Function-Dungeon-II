@@ -1,7 +1,8 @@
+// Unused namespace
 using System;
 using System.Collections.Generic;
 using UnityEngine;
-
+// Wrong namespace definition
 namespace LineController
 {
     /// <summary>
@@ -11,6 +12,7 @@ namespace LineController
     public class TrajectoryLineController : MonoBehaviour
     {
         [Header("Projectile Debug Settings")]
+        // False is the default value for bools, so it's not necessary to set it explicitly
         [SerializeField] private bool debugMode = false;
         [SerializeField] private Vector2 projectileVelocity;
 
@@ -22,8 +24,9 @@ namespace LineController
         [Min(0.0001f)]
         [SerializeField] private float followDistance = 5f; // Distance along the function line to set the start point
         [SerializeField] private float gravity = Physics.gravity.y; // Gravity value
+        // 0 is the default value for floats, so it's not necessary to set it explicitly
         [SerializeField] private float groundLevel = 0f;
-
+        // Needs to move below the class fields and before the methods
         public float GroundLevel
         {
             get { return groundLevel; }
@@ -57,16 +60,20 @@ namespace LineController
 
         private void Update()
         {
+            // Remove unnecessary call to DrawTrajectory
             DrawTrajectory();
         }
 
         /// <summary>
         /// Draws the trajectory of a projectile based on current settings and conditions.
         /// </summary>
+        // Unclear naming, is updating
+        // Please add comments regarding the logic
         public void DrawTrajectory()
         { 
             if (!trajectoryLineRenderer || !functionLineController)
                 return;
+            // Move to a separate method or add comments
             followDistance = Mathf.Clamp(followDistance, 0f, functionLineController.LineLength);
             var startPosition = new Vector3(followDistance, functionLineController.EvaluateFunction(followDistance), 0);
             Vector3 initialVelocity = debugMode ? projectileVelocity : functionLineController.GetVelocityAtPoint(startPosition, followDistance);
@@ -90,13 +97,13 @@ namespace LineController
 
             var calculatedSegments = Mathf.CeilToInt(timeToGround / timeStep);
             var trajectoryPoints = new List<Vector3>();
-
+            // Type is explicitly defined, which is not necessary
             for (int i = 0; i <= calculatedSegments; i++)
             {
                 var time = i * timeStep;
                 if (time > timeToGround)
                     time = timeToGround;
-
+                // Split up in named variables
                 var displacement = new Vector3(initialVelocity.x * time, initialVerticalVelocity * time + 0.5f * gravity * time * time, 0);
                 var nextPoint = startPosition + displacement;
 

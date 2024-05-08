@@ -1,5 +1,7 @@
 using UnityEngine;
 using UnityEditor;
+// Missing space
+// Incorrect namespace
 namespace Shake
 {
     [CustomEditor(typeof(ShakeBehavior))]
